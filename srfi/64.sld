@@ -6,8 +6,8 @@
 ;; Reporting: each FAIL prints one "FAIL ..." line; skipped/expected outcomes print
 ;; "SKIP ..." / "XFAIL ..." / "XPASS ..." lines.  The outermost test-end prints
 ;;   === P passed, F failed ===
-;; (this exact substring is relied on by the chibi survey and run-tests.sh's
-;; `0 failed` grep, so it is kept byte-stable) followed by a second
+;; (this exact substring is relied on by the chibi survey and by ]suites'
+;; scheme-kind summary parse, so it is kept byte-stable) followed by a second
 ;;   (X expected-fail, Y unexpected-pass, Z skipped)
 ;; line ONLY when any of those categories is nonzero -- so files that use none of
 ;; the new features produce byte-identical output to the older harness.
