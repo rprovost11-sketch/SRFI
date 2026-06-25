@@ -613,6 +613,17 @@
       (let ((associated (assoc char tm:directives)))
         (if associated (cdr associated) #f)))
 
+    ;; NOTE: two directives below reproduce known QUIRKS of the canonical SRFI 19
+    ;; reference implementation -- kept faithful (not "fixed") so portable SRFI 19
+    ;; code formats identically here and in other reference-based Schemes (Gauche,
+    ;; Chibi, ...).  Unlike strftime:
+    ;;   ~f  drops a fractional-second part of <= 2 digits and the first 2 digits of
+    ;;       a longer one (tm:fractional-part + the (> le 2)/(substring ns 2) logic),
+    ;;       e.g. a half-second renders as "05", not "05.5".
+    ;;   ~U  is off by one vs strftime %U on the first partial week (Sunday-first),
+    ;;       e.g. 2020-01-01 renders as "01", not "00".
+    ;; (The reference's date->julian-day division-by-zero on UTC dates WAS a genuine
+    ;; bug and is fixed above -- it crashed rather than producing standard output.)
     (define tm:directives
       (list
        (cons #\~ (lambda (date pad-with port) (display #\~ port)))
