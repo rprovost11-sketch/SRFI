@@ -54,6 +54,12 @@ file serves both ports byte-identically.
 - **`srfi/28.sld`** — Basic Format Strings (`~a ~s ~% ~~`).
 - **`srfi/48.sld`** — Intermediate Format Strings (a superset of 28: `~c ~w ~y`,
   radix/width directives, fixed-point `~f`, indirection `~? ~k`, destinations).
+- **`srfi/166.sld`** — Monadic Formatting (the `show` combinator library), a
+  practical core: `show`, the `displayed`/`written`/`numeric` formatters, the
+  `joined*`/`padded*`/`trimmed*`/`fitted*` combinators, `upcased`/`downcased`,
+  and the `with`/`with!`/`fn`/`forked`/`call-with-output` state machinery with
+  state variables (`radix`, `precision`, `pad-char`, `ellipsis`, `col`, ...).
+  The columnar/wrapped/Unicode-width extensions are deferred (see the file head).
 - **`srfi/19.sld`** — Time/Date data types and procedures.
 - **`srfi/152.sld`** — String Library (reduced), the COMPLETE procedure set.
   Criteria are predicates only (no SRFI-14 char-sets); pass a one-argument char
