@@ -44,10 +44,28 @@ subdirectory name lowercase so resolution works on case-sensitive filesystems.
 
 ## Contents
 
+All of the following are pure R7RS (`.sld` only, no native part), so a single
+file serves both ports byte-identically.
+
 - **`srfi/64.sld`** — a minimal, portable SRFI-64 test harness (plus
   `(chibi test)`'s `(test expected expr)` form), enough to run chibi's
-  `r7rs-tests.scm` on both ports. Pure R7RS, no native part. This is what the
-  scheme-tests chibi survey imports via `-L`.
+  `r7rs-tests.scm` on both ports. This is what the scheme-tests chibi survey
+  imports via `-L`.
+- **`srfi/28.sld`** — Basic Format Strings (`~a ~s ~% ~~`).
+- **`srfi/48.sld`** — Intermediate Format Strings (a superset of 28: `~c ~w ~y`,
+  radix/width directives, fixed-point `~f`, indirection `~? ~k`, destinations).
+- **`srfi/19.sld`** — Time/Date data types and procedures.
+- **`srfi/152.sld`** — String Library (reduced), the COMPLETE procedure set.
+  Criteria are predicates only (no SRFI-14 char-sets); pass a one-argument char
+  predicate where a criterion is expected.
+- **`srfi/13.sld`** — String Library (the older SRFI 13) as a compatibility shim
+  over `(srfi 152)`: re-exports the shared procedures and adds the SRFI-13-only
+  ones (`string-reverse`, `string-titlecase`, `string-tokenize`, `xsubstring`,
+  ...). Predicates-only criteria, like 152.
+- **`scheme/string.sld`** — the R7RS-large (Red Edition) `(scheme string)`
+  library, a thin alias re-exporting all of `(srfi 152)` under the standard
+  name. (Note: this one lives under `scheme/`, not `srfi/`, so `(import (scheme
+  string))` resolves to `scheme/string.sld` under the same `-L` root.)
 
 [pyScheme]: ../3PyScheme
 [cppScheme2]: ../4CPPScheme2
